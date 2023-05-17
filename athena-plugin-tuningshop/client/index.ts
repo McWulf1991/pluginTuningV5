@@ -6,7 +6,7 @@ import { Tuner_View_Events } from '../shared/events';
 import { iTunerSync } from '../shared/interfaces';
 import { CinematicCam } from './utility/cinematic';
 import { isAnyMenuOpen } from '@AthenaClient/webview';
-import { SYSTEM_EVENTS } from '@AthenaShared/enums/system';
+import { KEY_BINDS_TUNER } from '../shared/const';
 
 
 let syncData: iTunerSync;
@@ -15,14 +15,19 @@ let syncData: iTunerSync;
 const PAGE_NAME = 'Tuner';
 
 class InternalFunctions implements ViewModel {
+    static async init() {
+        AthenaClient.systems.hotkeys.add({
+            key: KEY_BINDS_TUNER.INTERACT,
+            description: 'Tune your vehicle',
+            modifier: 'shift',
+            identifier: 'open-tuner-for-vehicle',
+            keyDown: InternalFunctions.open,
+            
+        })
+    }
     static async open(_syncData: iTunerSync) {
         // Check if any other menu is open before opening this.
-        alt.log('test')
         if (isAnyMenuOpen()) {
-            return;
-        }
-
-        if(alt.Player.local.vehicle.engineOn !== false) {
             return;
         }
 
@@ -168,9 +173,10 @@ class InternalFunctions implements ViewModel {
         wheeltyrewidth: number,
         wheeltype: number,
         wheelid: number,
+        getModsCountType: number ,
     ) {
-        InternalFunctions.update(spoiler, fbumper, rbumper, sskirt, exhaust, frame, grille, hood, lwing, rwing, roof, engine, brakes, trans, horns, suspension, armor, turbo, xenon, plateh, platev, trimdesign, ornaments, dialdesign, doorint, seats, steeringw, shiftlever, plaques, hydraulics, engineb, airfilter, strutbar, archcover, antenna, exteriorp, tank, door, wroh, stickers, plate, windowtint, wheelcamber, wheelheight, wheelrimradius, wheeltrackwidth, wheeltyreradius, wheeltyrewidth, wheeltype, wheelid);
-        alt.emitServer(Tuner_View_Events.PURCHASE, spoiler, fbumper, rbumper, sskirt, exhaust, frame, grille, hood, lwing, rwing, roof, engine, brakes, trans, horns, suspension, armor, turbo, xenon, plateh, platev, trimdesign, ornaments, dialdesign, doorint, seats, steeringw, shiftlever, plaques, hydraulics, engineb, airfilter, strutbar, archcover, antenna, exteriorp, tank, door, wroh, stickers, plate, windowtint, wheelcamber, wheelheight, wheelrimradius, wheeltrackwidth, wheeltyreradius, wheeltyrewidth, wheeltype, wheelid);
+        InternalFunctions.update(spoiler, fbumper, rbumper, sskirt, exhaust, frame, grille, hood, lwing, rwing, roof, engine, brakes, trans, horns, suspension, armor, turbo, xenon, plateh, platev, trimdesign, ornaments, dialdesign, doorint, seats, steeringw, shiftlever, plaques, hydraulics, engineb, airfilter, strutbar, archcover, antenna, exteriorp, tank, door, wroh, stickers, plate, windowtint, wheelcamber, wheelheight, wheelrimradius, wheeltrackwidth, wheeltyreradius, wheeltyrewidth, wheeltype, wheelid, getModsCountType);
+        alt.emitServer(Tuner_View_Events.PURCHASE, spoiler, fbumper, rbumper, sskirt, exhaust, frame, grille, hood, lwing, rwing, roof, engine, brakes, trans, horns, suspension, armor, turbo, xenon, plateh, platev, trimdesign, ornaments, dialdesign, doorint, seats, steeringw, shiftlever, plaques, hydraulics, engineb, airfilter, strutbar, archcover, antenna, exteriorp, tank, door, wroh, stickers, plate, windowtint, wheelcamber, wheelheight, wheelrimradius, wheeltrackwidth, wheeltyreradius, wheeltyrewidth, wheeltype, wheelid, getModsCountType);
         InternalFunctions.close();
     }
 
@@ -213,28 +219,28 @@ class InternalFunctions implements ViewModel {
         exteriorp: number ,
         tank: number ,
         door: number ,
-        wroh: number  ,
+        wroh: number ,
         stickers: number ,
         plate: number ,
         windowtint: number ,
-        wheelcamber: number,
-        wheelheight: number,
-        wheelrimradius: number,
-        wheeltrackwidth: number,
-        wheeltyreradius: number,
-        wheeltyrewidth: number,
-        wheeltype: number,
-        wheelid: number,
+        wheelcamber: number ,
+        wheelheight: number ,
+        wheelrimradius: number ,
+        wheeltrackwidth: number ,
+        wheeltyreradius: number ,
+        wheeltyrewidth: number ,
+        wheeltype: number ,
+        wheelid: number ,
+        getModsCountType: number ,
     ) {
         if (!alt.Player.local.vehicle) {
             return;
         }
 
         if (wheelcamber) {
-            
             alt.on("streamSyncedMetaChange", (entity, key, value, oldValue) => {
                 // Checking conditions if we should apply the modifications
-                if (key !== "wheelMod") return;
+                if (key !== "wheelModCamber") return;
                 if (!(entity instanceof alt.Vehicle)) return;
                 modWheels(entity, value);
             });
@@ -245,86 +251,106 @@ class InternalFunctions implements ViewModel {
                 for (let i = 0; i <= vehicle.wheelsCount; i++) {
                     vehicle.setWheelCamber(i, data);
                 }
+
+                vehicle.setWheelCamber(0, wheelcamber);
+                vehicle.setWheelCamber(1, wheelcamber);
+                vehicle.setWheelCamber(2, wheelcamber);
+                vehicle.setWheelCamber(3, wheelcamber);
             }
         }
 
         if (wheelheight) {
-            
             alt.on("streamSyncedMetaChange", (entity, key, value, oldValue) => {
                 // Checking conditions if we should apply the modifications
-                if (key !== "wheelMod") return;
+                if (key !== "wheelModHeight") return;
                 if (!(entity instanceof alt.Vehicle)) return;
                 modWheels(entity, value);
             });
             
             function modWheels(vehicle, data) {
                 vehicle = alt.Player.local.vehicle;
-                data =wheelheight
+                data = wheelheight;
                 for (let i = 0; i <= vehicle.wheelsCount; i++) {
                     vehicle.setWheelHeight(i, data);
                 }
+
+                vehicle.setWheelHeight(0, wheelheight);
+                vehicle.setWheelHeight(1, wheelheight);
+                vehicle.setWheelHeight(2, wheelheight);
+                vehicle.setWheelHeight(3, wheelheight);
             }
         }
 
         if (wheelrimradius) {
-            
             alt.on("streamSyncedMetaChange", (entity, key, value, oldValue) => {
                 // Checking conditions if we should apply the modifications
-                if (key !== "wheelMod") return;
+                if (key !== "wheelModRimRadius") return;
                 if (!(entity instanceof alt.Vehicle)) return;
                 modWheels(entity, value);
             });
             
             function modWheels(vehicle, data) {
                 vehicle = alt.Player.local.vehicle;
-                data = wheelrimradius
+                data = wheelrimradius;
                 for (let i = 0; i <= vehicle.wheelsCount; i++) {
                     vehicle.setWheelRimRadius(i, data);
                 }
+
+                vehicle.setWheelRimRadius(0, wheelrimradius);
+                vehicle.setWheelRimRadius(1, wheelrimradius);
+                vehicle.setWheelRimRadius(2, wheelrimradius);
+                vehicle.setWheelRimRadius(3, wheelrimradius);
             }
         }
 
         if (wheeltrackwidth) {
-            
             alt.on("streamSyncedMetaChange", (entity, key, value, oldValue) => {
                 // Checking conditions if we should apply the modifications
-                if (key !== "wheelMod") return;
+                if (key !== "wheelModTrackWidth") return;
                 if (!(entity instanceof alt.Vehicle)) return;
                 modWheels(entity, value);
             });
             
             function modWheels(vehicle, data) {
                 vehicle = alt.Player.local.vehicle;
-                data = wheeltrackwidth
+                data = wheeltrackwidth;
                 for (let i = 0; i <= vehicle.wheelsCount; i++) {
-                    vehicle.setWheelCamber(i, data);
+                    vehicle.setWheelTrackWidth(i, data);
                 }
+
+                vehicle.setWheelTrackWidth(0, wheeltrackwidth);
+                vehicle.setWheelTrackWidth(1, wheeltrackwidth);
+                vehicle.setWheelTrackWidth(2, wheeltrackwidth);
+                vehicle.setWheelTrackWidth(3, wheeltrackwidth);
             }
         }
 
         if (wheeltyreradius) {
-            
             alt.on("streamSyncedMetaChange", (entity, key, value, oldValue) => {
                 // Checking conditions if we should apply the modifications
-                if (key !== "wheelMod") return;
+                if (key !== "wheelModTyreRadius") return;
                 if (!(entity instanceof alt.Vehicle)) return;
                 modWheels(entity, value);
             });
             
             function modWheels(vehicle, data) {
                 vehicle = alt.Player.local.vehicle;
-                data = wheeltyreradius
+                data = wheeltyreradius;
                 for (let i = 0; i <= vehicle.wheelsCount; i++) {
                     vehicle.setWheelTyreRadius(i, data);
                 }
+
+                vehicle.setWheelTyreRadius(0, wheeltyreradius);
+                vehicle.setWheelTyreRadius(1, wheeltyreradius);
+                vehicle.setWheelTyreRadius(2, wheeltyreradius);
+                vehicle.setWheelTyreRadius(3, wheeltyreradius);
             }
         }
 
         if (wheeltyrewidth) {
-            
             alt.on("streamSyncedMetaChange", (entity, key, value, oldValue) => {
                 // Checking conditions if we should apply the modifications
-                if (key !== "wheelMod") return;
+                if (key !== "wheelModTyreWidth") return;
                 if (!(entity instanceof alt.Vehicle)) return;
                 modWheels(entity, value);
             });
@@ -337,10 +363,15 @@ class InternalFunctions implements ViewModel {
                 for (let i = 0; i <= vehicle.wheelsCount; i++) {
                     vehicle.setWheelTyreWidth(i, data);
                 }
+
+                vehicle.setWheelTyreWidth(0, wheeltyrewidth);
+                vehicle.setWheelTyreWidth(1, wheeltyrewidth);
+                vehicle.setWheelTyreWidth(2, wheeltyrewidth);
+                vehicle.setWheelTyreWidth(3, wheeltyrewidth);
             }
         }
 
-        alt.emitServer(Tuner_View_Events.PREVIEW_TUNING, spoiler, fbumper, rbumper, sskirt, exhaust, frame, grille, hood, lwing, rwing, roof, engine, brakes, trans, horns, suspension, armor, turbo, xenon, plateh, platev, trimdesign, ornaments, dialdesign, doorint, seats, steeringw, shiftlever, plaques, hydraulics, engineb, airfilter, strutbar, archcover, antenna, exteriorp, tank, door, wroh, stickers, plate, windowtint, wheelcamber, wheelheight, wheelrimradius, wheeltrackwidth, wheeltyreradius, wheeltyrewidth, wheeltype, wheelid);
+        alt.emitServer(Tuner_View_Events.PREVIEW_TUNING, spoiler, fbumper, rbumper, sskirt, exhaust, frame, grille, hood, lwing, rwing, roof, engine, brakes, trans, horns, suspension, armor, turbo, xenon, plateh, platev, trimdesign, ornaments, dialdesign, doorint, seats, steeringw, shiftlever, plaques, hydraulics, engineb, airfilter, strutbar, archcover, antenna, exteriorp, tank, door, wroh, stickers, plate, windowtint, wheelcamber, wheelheight, wheelrimradius, wheeltrackwidth, wheeltyreradius, wheeltyrewidth, wheeltype, wheelid, getModsCountType);
     }
 
     static generateCameraPoints(): Array<alt.IVector3> {
@@ -422,4 +453,4 @@ class InternalFunctions implements ViewModel {
     }
 }
 
-alt.onServer(Tuner_View_Events.OPEN, InternalFunctions.open);
+alt.onServer(Tuner_View_Events.OPEN, InternalFunctions.init);

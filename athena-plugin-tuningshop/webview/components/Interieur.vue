@@ -6,7 +6,7 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
+                        :maxIndex="getModsCountType"
                         :indexValue="trimdesign"
                         :increment="1"
                         @input="(e) => settrimdesign(e)"
@@ -21,7 +21,7 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
+                        :maxIndex="getModsCountType"
                         :indexValue="ornaments"
                         :increment="1"
                         @input="(e) => setornaments(e)"
@@ -36,7 +36,7 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
+                        :maxIndex="getModsCountType"
                         :indexValue="dialdesign"
                         :increment="1"
                         @input="(e) => setdialdesign(e)"
@@ -51,7 +51,7 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
+                        :maxIndex="getModsCountType"
                         :indexValue="doorint"
                         :increment="1"
                         @input="(e) => setdoorint(e)"
@@ -66,7 +66,7 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
+                        :maxIndex="getModsCountType"
                         :indexValue="seats"
                         :increment="1"
                         @input="(e) => setseats(e)"
@@ -81,7 +81,7 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
+                        :maxIndex="getModsCountType"
                         :indexValue="steeringw"
                         :increment="1"
                         @input="(e) => setsteeringw(e)"
@@ -96,7 +96,7 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
+                        :maxIndex="getModsCountType"
                         :indexValue="shiftlever"
                         :increment="1"
                         @input="(e) => setshiftlever(e)"
@@ -111,7 +111,7 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
+                        :maxIndex="getModsCountType"
                         :indexValue="plaques"
                         :increment="1"
                         @input="(e) => setplaques(e)"
@@ -126,7 +126,7 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
+                        :maxIndex="getModsCountType"
                         :indexValue="engineb"
                         :increment="1"
                         @input="(e) => setengineb(e)"
@@ -141,7 +141,7 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
+                        :maxIndex="getModsCountType"
                         :indexValue="airfilter"
                         :increment="1"
                         @input="(e) => setairfilter(e)"
@@ -156,7 +156,7 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
+                        :maxIndex="getModsCountType"
                         :indexValue="archcover"
                         :increment="1"
                         @input="(e) => setarchcover(e)"
@@ -171,7 +171,7 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
+                        :maxIndex="getModsCountType"
                         :indexValue="tank"
                         :increment="1"
                         @input="(e) => settank(e)"
@@ -186,8 +186,8 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
-                        :indexValue="door"
+                        :maxIndex="getModsCountType"
+                        :indexValue="getModsCountType"
                         :increment="1"
                         @input="(e) => setdoor(e)"
                         @change="outputdoor"
@@ -201,7 +201,7 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
+                        :maxIndex="getModsCountType"
                         :indexValue="wroh"
                         :increment="1"
                         @input="(e) => setwroh(e)"
@@ -241,6 +241,7 @@ export default defineComponent({
             tank: 0,
             door: 0,
             wroh: 0,
+            getModsCountType: 0,
         };
     },
     props: {
@@ -261,7 +262,7 @@ export default defineComponent({
         Module: defineAsyncComponent(() => import('@components/Module.vue')),
     },
     computed: {
-        gettrimdesig(): Array<{ value: number }> {
+        gettrimdesign(): Array<{ value: number }> {
             const trimdesign      : Array<{ value: number }> = [];
 
             Object.keys(VEHICLE_TUNE_INTERIEUR_IDS).forEach((index) => {
@@ -387,6 +388,16 @@ export default defineComponent({
 
             return            wroh;
         },
+        getModsCountType     (): Array<{ value: number }> {
+            const getModsCountType            : Array<{ value: number }> = [];
+
+            Object.keys(VEHICLE_TUNE_INTERIEUR_IDS).forEach((index) => {
+                getModsCountType.push({ value: VEHICLE_TUNE_INTERIEUR_IDS[index] });
+            });
+
+            return            getModsCountType;
+        },
+
     },
     methods: {
         settrimdesign(e: Event) {
@@ -472,6 +483,12 @@ export default defineComponent({
             this.wroh = parseFloat(result);
 
             this.$emit('update-wroh', this.wroh);
+        },
+        setModsCountType(e: Event) {
+            const result = e.target['value'];
+            this.getModsCountType = parseFloat(result);
+
+            this.$emit('update-getModsCountType', this.getModsCountType);
         },
 
         outputtrimdesign(value: number) {
@@ -572,6 +589,13 @@ export default defineComponent({
 
             this.$emit('set-wroh', { value }, true);
         },
+        outputModsCountType(value: number) {
+            if (value === undefined) {
+                return;
+            }
+
+            this.$emit('set-getModsCountType', { value }, true);
+        },
     },
     watch: {
         data(syncData: iTunerSync) {
@@ -589,6 +613,7 @@ export default defineComponent({
             this.tank = syncData.tank;
             this.door = syncData.door;
             this.wroh = syncData.wroh;
+            this.getModsCountType = syncData.getModsCountType;
 
             this.$nextTick(() => {
                 this.$emit('set-trimdesign', syncData.trimdesign, true);
@@ -619,6 +644,7 @@ export default defineComponent({
                 this.$emit('update-tank', this.tank);
                 this.$emit('update-door', this.door);
                 this.$emit('update-wroh', this.wroh);
+                this.$emit('update-getModsCountType', this.getModsCountType);
             });
         },
     },

@@ -49,8 +49,9 @@ export interface iTunerSync {
     wheeltrackwidth: number ;
     wheeltyreradius: number ;
     wheeltyrewidth: number ;
-    wheelid: number;
-    wheeltype: number;
+    wheelid: number ;
+    wheeltype: number ;
+    getModsCountType: number;
 }
 
 export interface ITuner {

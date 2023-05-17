@@ -6,7 +6,7 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
+                        :maxIndex="getModsCountType"
                         :indexValue="spoiler"
                         :increment="1"
                         @input="(e) => setspoiler(e)"
@@ -21,7 +21,7 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
+                        :maxIndex="getModsCountType"
                         :indexValue="fbumper"
                         :increment="1"
                         @input="(e) => setfbumper(e)"
@@ -36,7 +36,7 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
+                        :maxIndex="getModsCountType"
                         :indexValue="rbumper"
                         :increment="1"
                         @input="(e) => setrbumper(e)"
@@ -51,7 +51,7 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
+                        :maxIndex="getModsCountType"
                         :indexValue="sskirt"
                         :increment="1"
                         @input="(e) => setsskirt(e)"
@@ -66,7 +66,7 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
+                        :maxIndex="getModsCountType"
                         :indexValue="exhaust"
                         :increment="1"
                         @input="(e) => setexhaust(e)"
@@ -81,7 +81,7 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
+                        :maxIndex="getModsCountType"
                         :indexValue="frame"
                         :increment="1"
                         @input="(e) => setframe(e)"
@@ -96,7 +96,7 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
+                        :maxIndex="getModsCountType"
                         :indexValue="grille"
                         :increment="1"
                         @input="(e) => setgrille(e)"
@@ -111,7 +111,7 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
+                        :maxIndex="getModsCountType"
                         :indexValue="hood"
                         :increment="1"
                         @input="(e) => sethood(e)"
@@ -126,7 +126,7 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
+                        :maxIndex="getModsCountType"
                         :indexValue="lwing"
                         :increment="1"
                         @input="(e) => setlwing(e)"
@@ -141,7 +141,7 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
+                        :maxIndex="getModsCountType"
                         :indexValue="rwing"
                         :increment="1"
                         @input="(e) => setrwing(e)"
@@ -156,7 +156,7 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
+                        :maxIndex="getModsCountType"
                         :indexValue="roof"
                         :increment="1"
                         @input="(e) => setroof(e)"
@@ -171,7 +171,7 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
+                        :maxIndex="getModsCountType"
                         :indexValue="horns"
                         :increment="1"
                         @input="(e) => sethorns(e)"
@@ -186,7 +186,7 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
+                        :maxIndex="getModsCountType"
                         :indexValue="plateh"
                         :increment="1"
                         @input="(e) => setplateh(e)"
@@ -201,7 +201,7 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
+                        :maxIndex="getModsCountType"
                         :indexValue="platev"
                         :increment="1"
                         @input="(e) => setplatev(e)"
@@ -216,7 +216,7 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
+                        :maxIndex="getModsCountType"
                         :indexValue="hydraulics"
                         :increment="1"
                         @input="(e) => sethydraulics(e)"
@@ -231,7 +231,7 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
+                        :maxIndex="getModsCountType"
                         :indexValue="strutbar"
                         :increment="1"
                         @input="(e) => setstrutbar(e)"
@@ -246,7 +246,7 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
+                        :maxIndex="getModsCountType"
                         :indexValue="antenna"
                         :increment="1"
                         @input="(e) => setantenna(e)"
@@ -261,7 +261,7 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
+                        :maxIndex="getModsCountType"
                         :indexValue="exteriorp"
                         :increment="1"
                         @input="(e) => setexteriorp(e)"
@@ -276,7 +276,7 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
+                        :maxIndex="getModsCountType"
                         :indexValue="stickers"
                         :increment="1"
                         @input="(e) => setstickers(e)"
@@ -291,7 +291,7 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
+                        :maxIndex="getModsCountType"
                         :indexValue="plate"
                         :increment="1"
                         @input="(e) => setplate(e)"
@@ -306,7 +306,7 @@
                 <div class="stack pt-6">
                     <RangeInput
                         :minIndex="0"
-                        :maxIndex="34"
+                        :maxIndex="getModsCountType"
                         :indexValue="windowtint"
                         :increment="1"
                         @input="(e) => setwindowtint(e)"
@@ -353,6 +353,7 @@ export default defineComponent({
             stickers: 0,
             plate: 0,
             windowtint: 0,
+            getModsCountType: 0,
         };
     },
     props: {
@@ -563,6 +564,16 @@ export default defineComponent({
 
             return windowtint;
         },
+
+        getModsCountType     (): Array<{ value: number }> {
+            const getModsCountType            : Array<{ value: number }> = [];
+
+            Object.keys(VEHICLE_TUNE_EXTERIEUR_IDS).forEach((index) => {
+                getModsCountType.push({ value: VEHICLE_TUNE_EXTERIEUR_IDS[index] });
+            });
+
+            return            getModsCountType;
+        },
     },
     methods: {
         setspoiler(e: Event) {
@@ -690,6 +701,12 @@ export default defineComponent({
             this.windowtint = parseFloat(result);
 
             this.$emit('update-windowtint', this.windowtint);
+        },
+        setModsCountType(e: Event) {
+            const result = e.target['value'];
+            this.getModsCountType = parseFloat(result);
+
+            this.$emit('update-getModsCountType', this.getModsCountType);
         },
 
         outputspoiler(value: number) {
@@ -839,6 +856,13 @@ export default defineComponent({
 
             this.$emit('set-windowtint', { value }, true);
         },
+        outputModsCountType(value: number) {
+            if (value === undefined) {
+                return;
+            }
+
+            this.$emit('set-getModsCountType', { value }, true);
+        },
     },
     watch: {
         data(syncData: iTunerSync) {
@@ -863,6 +887,7 @@ export default defineComponent({
             this.stickers            = syncData.stickers;
             this.plate               = syncData.plate;
             this.windowtint          = syncData.windowtint;
+            this.getModsCountType    = syncData.getModsCountType;
 
             this.$nextTick(() => {
                 this.$emit('set-spoiler', syncData.spoiler, true);
@@ -886,6 +911,7 @@ export default defineComponent({
                 this.$emit('set-stickers', syncData.stickers, true);
                 this.$emit('set-plate', syncData.plate, true);
                 this.$emit('set-windowtint', syncData.windowtint, true);
+                this.$emit('set-getModsCountType', syncData.getModsCountType, true);
                 this.$emit('update-spoiler', this.spoiler);
                 this.$emit('update-fbumper', this.fbumper);
                 this.$emit('update-rbumper', this.rbumper);
@@ -907,6 +933,7 @@ export default defineComponent({
                 this.$emit('update-stickers', this.stickers);
                 this.$emit('update-plate', this.plate);
                 this.$emit('update-windowtint', this.windowtint);
+                this.$emit('update-getModsCountType', this.getModsCountType);
             });
         },
     },

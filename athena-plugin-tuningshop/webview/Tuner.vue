@@ -4,23 +4,23 @@
             <div class="split split-full space-between mt-2">
                 <Button class="mr-1 fill-full-width" :color="pageIndex === 0 ? 'orange' : 'blue'" @click="setPage(0)">
                     <!-- {{ locale.STANCE }} -->
-                    <Icon :shadow="false" class="stat-icon mr-2 fill-full-width" icon="icon-car_repair" :size="20" />
+                    <Icon :shadow="false" class="stat-icon fill-full-width" icon="icon-car_repair" :size="20" />
                 </Button>
                 <Button class="mr-1 fill-full-width" :color="pageIndex === 1 ? 'orange' : 'blue'" @click="setPage(1)">
                     <!-- {{ locale.OPTIC }} -->
-                    <Icon :shadow="false" class="stat-icon mr-2 fill-full-width" icon="icon-auto_fix_high" :size="20" />
+                    <Icon :shadow="false" class="stat-icon fill-full-width" icon="icon-auto_fix_high" :size="20" />
                 </Button>
                 <Button class="mr-1 fill-full-width" :color="pageIndex === 2 ? 'orange' : 'blue'" @click="setPage(2)">
                     <!-- {{ locale.INTERIEUR }} -->
-                    <Icon :shadow="false" class="stat-icon mr-2 fill-full-width" icon="icon-dripping-star" :size="20" />
+                    <Icon :shadow="false" class="stat-icon fill-full-width" icon="icon-dripping-star" :size="20" />
                 </Button>
                 <Button class="mr-1 fill-full-width" :color="pageIndex === 3 ? 'orange' : 'blue'" @click="setPage(3)">
                     <!-- {{ locale.PERFORMANCE }} -->
-                    <Icon :shadow="false" class="stat-icon mr-2 fill-full-width" icon="icon-gears" :size="20" />
+                    <Icon :shadow="false" class="stat-icon fill-full-width" icon="icon-gears" :size="20" />
                 </Button>
                 <Button class="mr-1 fill-full-width" :color="pageIndex === 4 ? 'orange' : 'blue'" @click="setPage(4)">
                     <!-- {{ locale.WHEELS }} -->
-                    <Icon :shadow="false" class="stat-icon mr-2 fill-full-width" icon="icon-cartwheel" :size="20" />
+                    <Icon :shadow="false" class="stat-icon fill-full-width" icon="icon-cartwheel" :size="20" />
                 </Button>
             </div>
             <div class="page-filler">
@@ -82,6 +82,7 @@
                     @set-windowtint="windowtint"
                     @set-wheeltype="wheeltype"
                     @set-wheelid="wheelid"
+                    @set-getModsCountType="getModsCountType"
                     @update-wheelcamber="updateCamber"
                     @update-wheelheight="updateHeight"
                     @update-wheelrimradius="updateRimRadius"
@@ -134,20 +135,21 @@
                     @update-windowtint="updateWindowTint"
                     @update-wheeltype="updateWheelType"
                     @update-wheelid="updateWheelId"
+                    @update-getModsCountType="updateModsCountType"
                 ></component>
             </div>
             <div class="split">
                 <Button color="red" class="mt-4 mr-2 fill-full-width" @click="exit">
                     <!-- {{ locale.EXIT }} -->
-                    <Icon :shadow="false" class="stat-icon mr-2 fill-full-width" icon="icon-exit" :size="25" />
+                    <Icon :shadow="false" class="stat-icon2 mr-2 fill-full-width" icon="icon-exit" :size="25" />
                 </Button>
                 <Button color="yellow" class="mt-4 mr-2 fill-full-width" @click="nextCam">
                     <!-- {{ locale.CAMERA }} -->
-                    <Icon :shadow="false" class="stat-icon mr-2 fill-full-width" icon="icon-camera" :size="25" />
+                    <Icon :shadow="false" class="stat-icon2 mr-2 fill-full-width" icon="icon-camera" :size="25" />
                 </Button>
                 <Button color="green" class="mt-4 mr-2 fill-full-width" @click="purchase">
                     <!-- {{ locale.BUY }} -->
-                    <Icon :shadow="false" class="stat-icon mr-2 fill-full-width" icon="icon-pay-money" :size="25" />
+                    <Icon :shadow="false" class="stat-icon2 mr-2 fill-full-width" icon="icon-pay-money" :size="25" />
                 </Button>
             </div>
         </div>
@@ -233,6 +235,7 @@ export default defineComponent({
             wheeltyrewidth: 0,
             wheeltype: 0,
             wheelid: 0,
+            getModsCountType: 0,
             pageIndex: 1,
             pages: ['Stance', 'Optics', 'Interieur', 'Performance', 'Wheels'],
             locale: TUNER_LOCALE,
@@ -289,6 +292,7 @@ export default defineComponent({
                 wheeltyrewidth: 0,
                 wheeltype: 0,
                 wheelid: 0,
+                getModsCountType: 0,
             },
         };
     },
@@ -622,6 +626,11 @@ export default defineComponent({
 
             this.update();
         },
+        updateModsCountType(getModsCountType: number) {
+            this.getModsCountType = getModsCountType;
+
+            this.update();
+        },
 
         update() {
             if ('alt' in window) {
@@ -679,6 +688,7 @@ export default defineComponent({
                     this.wheeltyrewidth,
                     this.wheeltype,
                     this.wheelid,
+                    this.getModsCountType,
                 );
             }
         },
@@ -744,6 +754,8 @@ export default defineComponent({
                     this.wheeltyrewidth,
                     this.wheeltype,
                     this.wheelid,
+                    this.getModsCountType,
+                    `${ComponentName}:Close`
                 );
             }
         },
@@ -764,8 +776,8 @@ export default defineComponent({
     background: rgba(12, 12, 12, 1) !important;
     min-height: 100vh;
     max-height: 100vh;
-    min-width: 250px;
-    max-width: 250px;
+    min-width: 260px;
+    max-width: 260px;
     overflow: hidden;
 }
 
@@ -777,7 +789,7 @@ export default defineComponent({
 
 .stat-icon {
     display: flex;
-    color: rgb(165, 148, 148);
+    color: rgb(185, 219, 228);
     align-items: center;
     justify-content: center;
     min-width: 25px;
@@ -786,11 +798,10 @@ export default defineComponent({
     max-height: 25px;
     position: absolute;
     z-index: 99;
-    /* opacity: 0.5; */
     left: 7.5px;
     top: -2px;
-    mix-blend-mode: lighten;
+    /* mix-blend-mode: lighten;
     color: #e7e7e8;
-    text-shadow: 0px 0px 6px #010101;
+    text-shadow: 0px 0px 6px #010101; */
 }
 </style>

@@ -207,3 +207,7 @@ export const VEHICLE_TUNE_EXTERIEUR_IDS = {
 export const VEHICLE_TUNE_INTERIEUR_IDS = {
     STANDART: 0,
 }
+
+export const KEY_BINDS_TUNER = {
+    INTERACT: 115,
+}
